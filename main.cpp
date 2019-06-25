@@ -3,6 +3,8 @@
 #include "system.hpp"
 #include <iostream>
 #include "logger.hpp"
+#include "path.hpp"
+
 int main()
 {
 	Logger logger;
@@ -28,6 +30,7 @@ int main()
 		}
 
 		window.clear();
+
 		system.drawPlanets(window);
 		window.display();
 	}

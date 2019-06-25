@@ -3,6 +3,7 @@
 
 #include <vector>
 #include "planet.hpp"
+#include "path.hpp"
 #include <SFML/Window.hpp>
 
 bool isWithinXNum(int num1, int num2, int xVal);
@@ -17,10 +18,17 @@ struct System
 	System(int num, int radius, int gap) 
 	{
 		planets = generatePlanets(num, radius, gap);
+		for (int i = 0; i != num - 1; ++i)	//TEMP PLEASE REMOVE
+		{
+			for (int i2 = i + 1; i2 != num; ++i2)
+				paths.push_back(Path(planets[i], planets[i2], 1));
+		}
 	} 
 
 	void drawPlanets(sf::RenderWindow &window)
 	{
+		for (std::vector<Path>::iterator iter = paths.begin(); iter != paths.end(); ++iter)
+			iter->drawPath(window);	//TEMP PLEASE REMOVE
 		for (std::vector<Planet>::iterator iter = planets.begin(); iter != planets.end(); ++iter)
 			window.draw(iter->returnShape());
 	}
@@ -29,6 +37,7 @@ struct System
 
 private:
 	std::vector<Planet> planets;
+	std::vector<Path> paths;	//TEMP PLEASE REMOVE
 };
 
 #endif
