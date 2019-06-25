@@ -4,6 +4,7 @@
 #include "SFML\Graphics.hpp" 
 #include "planet.hpp"
 #include <cmath>
+#include <array>
 
 float distanceBetween(Planet planet1, Planet planet2);
 float getRotation(Planet planet1, Planet planet2);
@@ -11,7 +12,7 @@ float getRotation(Planet planet1, Planet planet2);
 struct Path
 {
 	Path() = default;
-	Path(Planet planet1, Planet planet2, float thickness)
+	Path(const Planet &planet1, const Planet &planet2, float thickness) : planets({ &planet1, &planet2 })
 	{
 		float length = distanceBetween(planet1, planet2);
 		float rotation = getRotation(planet1, planet2);
@@ -25,10 +26,15 @@ struct Path
 	{
 		window.draw(path);
 	}
+	const std::array<const Planet*, 2> returnPlanets() const
+	{
+		return planets;
+	}
 
 
 private:
 	sf::RectangleShape path;
+	const std::array<const Planet*, 2> planets;
 };
 
 #endif

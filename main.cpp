@@ -30,7 +30,7 @@ int main()
 		}
 
 		window.clear();
-
+		system.drawPaths(window);
 		system.drawPlanets(window);
 		window.display();
 	}

@@ -45,7 +45,7 @@ float getRotation(Planet planet1, Planet planet2)
 	}
 	else if (planet1.getXPos() < planet2.getXPos() && planet1.getYPos() < planet2.getYPos())	//planet2 is in quadrant 2
 	{
-		return static_cast<float>(atan(yDist / xDist) * (180 / pi()) + 180.f);
+		return static_cast<float>(atan(yDist / xDist) * (180 / pi()));	//Made a change
 	}
 	else if (planet1.getXPos() < planet2.getXPos() && planet1.getYPos() > planet2.getYPos())	//planet2 is in quadrant 1
 	{

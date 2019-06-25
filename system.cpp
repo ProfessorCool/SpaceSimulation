@@ -1,6 +1,7 @@
 #include "system.hpp"
 #include <random>
 #include <iostream>
+#include <array>
 
 bool isWithinXNum(int num1, int num2, int xVal)
 {
@@ -70,4 +71,53 @@ std::vector<Planet> generatePlanets(int num, int radius, int gap)
 	}
 	std::cout << numGen;
 	return planets;
+}
+bool System::isAlreadyConnected(const Planet &planet1, const Planet &planet2) const
+{
+	for (const auto &i : paths)
+	{
+		if (*i.returnPlanets()[0] == planet1 && *i.returnPlanets()[1] == planet2 || *i.returnPlanets()[1] == planet1 && *i.returnPlanets()[0] == planet2)
+			return true;
+	}
+	return false;
+}
+void System::generatePaths(int thickness)
+{
+	//Step 1: connect the planets closest to eachother
+	for (int i = 0; i != planets.size(); ++i)
+	{
+		float smallestDist = 0.f;	//temporay placeholder
+		std::array<Planet*, 2> planetsOfSmallest;
+
+		for (int i2 = 0; i2 != planets.size(); ++i2)	
+		{
+			if (distanceBetween(planets[i], planets[i2]) < smallestDist && i != i2 || static_cast<int>(smallestDist) == 0)	//Check if a value was initialized
+			{
+				smallestDist = distanceBetween(planets[i], planets[i2]);
+				planetsOfSmallest = { &planets[i], &planets[i2] };
+			}
+		}
+		if (!isAlreadyConnected(*planetsOfSmallest[0], *planetsOfSmallest[1]))
+		{
+			paths.push_back(Path(*planetsOfSmallest[0], *planetsOfSmallest[1], thickness));
+		}
+	}
+	/*for (int i = 0; i != planets.size() - 1; ++i)
+	{
+		float smallestDist = distanceBetween(planets[i], planets[i + 1]);	//temporay placeholder
+		std::array<Planet*, 2> planetsOfSmallest = { &planets[i], &planets[i + 1] };
+		for (int i2 = 2; i2 != planets.size(); ++i2)	//Starts at 2 because placeholder took the i=1
+		{
+			if (distanceBetween(planets[i], planets[i2]) < smallestDist)
+			{
+				smallestDist = distanceBetween(planets[i], planets[i2]);
+				planetsOfSmallest = { &planets[i], &planets[i2] };
+			}
+		}
+		if (!isAlreadyConnected(*planetsOfSmallest[0], *planetsOfSmallest[1]))
+		{
+			paths.push_back(Path(*planetsOfSmallest[0], *planetsOfSmallest[1], thickness));
+		}
+	}*/
+
 }

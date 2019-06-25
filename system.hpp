@@ -13,31 +13,31 @@ bool planetsTooClose(Planet planet1, Planet planet2, int gap);
 struct System
 {
 	bool planetsTooClose(int gap);
-	
+	void generatePaths(int thickness);
 
 	System(int num, int radius, int gap) 
 	{
 		planets = generatePlanets(num, radius, gap);
-		for (int i = 0; i != num - 1; ++i)	//TEMP PLEASE REMOVE
-		{
-			for (int i2 = i + 1; i2 != num; ++i2)
-				paths.push_back(Path(planets[i], planets[i2], 1));
-		}
+		generatePaths(2);
 	} 
-
-	void drawPlanets(sf::RenderWindow &window)
+	void drawPaths(sf::RenderWindow &window)
 	{
 		for (std::vector<Path>::iterator iter = paths.begin(); iter != paths.end(); ++iter)
-			iter->drawPath(window);	//TEMP PLEASE REMOVE
+			iter->drawPath(window);
+	}
+	void drawPlanets(sf::RenderWindow &window)
+	{
 		for (std::vector<Planet>::iterator iter = planets.begin(); iter != planets.end(); ++iter)
 			window.draw(iter->returnShape());
 	}
+	bool isAlreadyConnected(const Planet &planet1, const Planet &planet2) const;
+	
 
 	
 
 private:
 	std::vector<Planet> planets;
-	std::vector<Path> paths;	//TEMP PLEASE REMOVE
+	std::vector<Path> paths;
 };
 
 #endif
