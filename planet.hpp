@@ -7,7 +7,7 @@
 struct Planet
 {
 	Planet() = default;
-	Planet(int ixPos, int iyPos, sf::Color color, float radius) : xPos(ixPos), yPos(iyPos) 
+	Planet(int ixPos, int iyPos, sf::Color color, float radius) : xPos(ixPos), yPos(iyPos)
 	{
 		circle = sf::CircleShape(radius);
 		circle.setFillColor(color);

@@ -9,7 +9,7 @@ int main()
 {
 	Logger logger;
 	sf::RenderWindow window(sf::VideoMode(1600, 900), "SFML works!");
-	System system(32, 10, 5);
+	System system(15, 10, 5);
 
 	while (window.isOpen())
 	{
@@ -32,6 +32,7 @@ int main()
 		window.clear();
 		system.drawPaths(window);
 		system.drawPlanets(window);
+		system.drawPlanetIndexNo(window);
 		window.display();
 	}
 

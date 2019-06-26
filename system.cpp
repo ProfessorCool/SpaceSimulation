@@ -83,7 +83,7 @@ bool System::isAlreadyConnected(const Planet &planet1, const Planet &planet2) co
 }
 void System::generatePaths(int thickness)
 {
-	//Step 1: connect the planets closest to eachother
+	//Step 1: connect the planets closest to eachother. This creates clusters of planets
 	for (int i = 0; i != planets.size(); ++i)
 	{
 		float smallestDist = 0.f;	//temporay placeholder
@@ -120,4 +120,27 @@ void System::generatePaths(int thickness)
 		}
 	}*/
 
+	//Step 2: connect each cluster to another to allow travel between all planets
+	/*
+	std::vector<std::vector<Planet>> clusters;
+	for (int i = 0; i != planets.size(); ++i)
+	{
+
+	}
+	*/
 }
+/*
+std::vector<Planet> System::connectedPlanets(Planet planet)
+{
+	std::vector<Planet> temp;
+	temp.push_back(planet);
+
+	for (int i = 0; i != paths.size(); ++i)
+	{
+		if (paths[i].linksPlanet(planet))
+		{
+			
+			temp.push_back(*paths[i].returnOtherLinkedPlanet(planet));
+		}
+	}
+}*/

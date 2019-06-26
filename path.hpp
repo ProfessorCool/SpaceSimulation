@@ -30,7 +30,8 @@ struct Path
 	{
 		return planets;
 	}
-
+	bool linksPlanet(const Planet &planet) const;
+	const Planet *returnOtherLinkedPlanet(const Planet &planet) const;
 
 private:
 	sf::RectangleShape path;

@@ -63,3 +63,17 @@ float getRotation(Planet planet1, Planet planet2)
 	
 		
 }
+bool Path::linksPlanet(const Planet &planet) const
+{
+	if (planet == *planets[0] || planet == *planets[1])
+		return true;
+	else
+		return false;
+}
+const Planet *Path::returnOtherLinkedPlanet(const Planet &planet) const	//MUST CHECK THAT THEY ARE ALREADY LINKED
+{
+	if (planet == *planets[0])
+		return planets[1];
+	else
+		return planets[0];
+}
